@@ -51,6 +51,15 @@ public class CacheConfiguration {
             createCache(cm, com.dataely.app.domain.User.class.getName());
             createCache(cm, com.dataely.app.domain.Authority.class.getName());
             createCache(cm, com.dataely.app.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.dataely.app.domain.Organization.class.getName());
+            createCache(cm, com.dataely.app.domain.Organization.class.getName() + ".businessUnits");
+            createCache(cm, com.dataely.app.domain.BusinessUnit.class.getName());
+            createCache(cm, com.dataely.app.domain.BusinessUnit.class.getName() + ".projects");
+            createCache(cm, com.dataely.app.domain.Project.class.getName());
+            createCache(cm, com.dataely.app.domain.Project.class.getName() + ".environments");
+            createCache(cm, com.dataely.app.domain.ServiceOwner.class.getName());
+            createCache(cm, com.dataely.app.domain.ServiceOwner.class.getName() + ".environments");
+            createCache(cm, com.dataely.app.domain.Environment.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

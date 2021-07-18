@@ -1,0 +1,106 @@
+/* Entities for Dataely Gateway */
+
+entity Organization {
+	code String required
+    name String required
+    detail String
+    creationDate Instant
+    lastUpdated Instant
+}
+
+entity BusinessUnit {
+	code String required
+    name String required
+    detail String
+    creationDate Instant
+    lastUpdated Instant
+}
+
+entity Project {
+	code String required
+    name String required
+    detail String
+    creationDate Instant
+    lastUpdated Instant
+}
+
+entity ServiceOwner {
+    firstName String required
+    lastName String required
+    name String required
+    role String required
+    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    contactNumber String required
+    extension String
+    location String
+    addressLine1 String 
+    addressLine2 String
+    city String 
+    country String
+    image ImageBlob
+}
+
+entity Environment {
+	code String required
+    name String required
+    detail String
+    appType EAppType required
+    type EEnvType required
+    purpose EEnvPurpose required
+    creationDate Instant
+    lastUpdated Instant
+    
+}
+
+enum EEnvPurpose {
+  PROFILING, MASKING, REPORTING
+}
+
+enum EEnvType {
+  STANDALONE,
+  INTEGRATED,
+  DEVELOPMENT,
+  TESTING,
+  TRAINING,
+  STAGING,
+  PRODUCTION,
+  OTHER
+}
+
+enum EAppType {
+  CRM,
+  HR,
+  FINANCE,
+  COMMUNICATION,
+  MESSAGING,
+  MARKETING,
+  WEB,
+  MOBILE,
+  SERVICE,
+  DMS,
+  HELPDESK,
+  ACCOUNTING,
+  ERP,
+  ANALYTICS,
+  BI,
+  OTHER
+}
+
+relationship OneToOne {
+    Organization{user(login) required} to User
+}
+
+relationship OneToMany {  
+   Organization{businessUnit} to BusinessUnit{organization(name)}
+   BusinessUnit{project(name)} to Project{businessUnit(name)}
+   Project{environment(name)} to Environment{project(name)}
+}
+
+relationship ManyToOne {
+   Environment{serviceOwner(name)} to ServiceOwner{environment(name)}
+}
+
+
+service * with serviceImpl
+paginate * with pagination
+dto * with mapstruct
