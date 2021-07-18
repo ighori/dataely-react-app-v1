@@ -1,0 +1,71 @@
+{
+  "name": "Environment",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "detail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "appType",
+      "fieldType": "EAppType",
+      "fieldValues": "CRM,HR,FINANCE,COMMUNICATION,MESSAGING,MARKETING,WEB,MOBILE,SERVICE,DMS,HELPDESK,ACCOUNTING,ERP,ANALYTICS,BI,OTHER",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "EEnvType",
+      "fieldValues": "STANDALONE,INTEGRATED,DEVELOPMENT,TESTING,TRAINING,STAGING,PRODUCTION,OTHER",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "purpose",
+      "fieldType": "EEnvPurpose",
+      "fieldValues": "PROFILING,MASKING,REPORTING",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "serviceOwner",
+      "otherEntityRelationshipName": "environment",
+      "relationshipName": "serviceOwner",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "project",
+      "otherEntityRelationshipName": "environment",
+      "relationshipName": "project",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "environment",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210718132217"
+}
